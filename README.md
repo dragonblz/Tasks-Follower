@@ -7,7 +7,7 @@ Easily add, view, update, and delete your tasks—right from your terminal!
 
 ## Features
 
-- **Add Tasks:** Add one or multiple tasks at once.
+- **Add Tasks:** Add one or multiple tasks at once, with optional due dates.
 - **View Tasks:** See all your tasks in a clean, paginated format.
 - **Update Tasks:** Change the status of any task (pending, completed, progress, overdue).
 - **Delete Tasks:** Remove tasks by their ID.
@@ -16,33 +16,42 @@ Easily add, view, update, and delete your tasks—right from your terminal!
 
 ---
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-- Python 3.x (comes with `sqlite3` module)
-
-### Installation
+### With pipx (Recommended)
 
 1. **Clone the repository:**
-    ```bash
+    ```sh
     git clone https://github.com/dragonblz/Tasks-Follower.git
     cd Tasks-Follower
     ```
 
-2. **Run the script:**
-    ```bash
-    python Tasks.py
+2. **Install with pipx:**
+    ```sh
+    pipx install .
     ```
+
+3. **(Optional) If you see a PATH warning, run:**
+    ```sh
+    pipx ensurepath
+    ```
+    Then restart your terminal.
 
 ---
 
 ## Usage
 
-When you run the script, your current tasks will be displayed.  
-You can then choose to add, view, update, or delete tasks interactively.
+After installation, run the tool from any terminal:
 
-### Example Workflow
+```sh
+tasks-follower
+```
+
+You’ll see your current tasks and be prompted to add, view, update, or delete tasks interactively.
+
+---
+
+## Example Workflow
 
 ```
 Your current tasks:
@@ -50,18 +59,15 @@ All tasks:
 ID: 1
 Title: Buy groceries
 Status: pending
-Due date: None
---------------------
-ID: 2
-Title: Finish homework
-Status: completed
-Due date: 2025-09-12
+Due Date: 2025-09-15
 --------------------
 What action do u want to perform? (add/view/delete/update): add
 How many tasks do you want to add? 2
 Enter task title: Call Alice
+Enter due date (YYYY-MM-DD) or leave blank: 2025-09-20
 Task added!
 Enter task title: Read a book
+Enter due date (YYYY-MM-DD) or leave blank:
 Task added!
 ```
 
@@ -76,19 +82,13 @@ Task added!
 
 ---
 
-## Contributing
+## Credits
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-All of the Readme was made by AI, the code was created by me.
+- Project by [dragonblz](https://github.com/dragonblz)
+- **README generated with the help of AI (GitHub Copilot)**
 
 ---
 
 ## License
 
 [MIT](LICENSE)
-
----
-
-## Author
-
-[dragonblz](https://github.com/dragonblz)
