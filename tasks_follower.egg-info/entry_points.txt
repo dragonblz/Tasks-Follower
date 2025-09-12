@@ -1,0 +1,2 @@
+[console_scripts]
+tasks-follower = tasks_follower.__main__:main

@@ -59,51 +59,51 @@ def update_task_status(task_id, new_status):
     cur.execute('UPDATE tasks SET status = ? WHERE id = ?', (new_status, task_id))
     con.commit()
 
-
-
-print("Your current tasks:")
-print_all_tasks_paginated()
-
-user = input("What action do u want to perform? (add/view/delete/update): ")
-
-if user == "add":
-    add_multiple_tasks()
-
-elif user == "view":
+def main():
+    print("Your current tasks:")
     print_all_tasks_paginated()
 
-elif user == "delete":
-    task_id = int(input("Enter the ID of the task to delete: "))
-    Delete_task(task_id)
-    print("Task deleted!")
+    user = input("What action do u want to perform? (add/view/delete/update): ")
 
-elif user == "update":
-    task_id = int(input("enter the ID of the task to update: "))
-    new_status = input("enter the new status (pending/completed/progress/overdue): ")
-    update_task_status(task_id, new_status)
-    print("Task updated!")
+    if user == "add":
+        add_multiple_tasks()
+
+    elif user == "view":
+        print_all_tasks_paginated()
+
+    elif user == "delete":
+        task_id = int(input("Enter the ID of the task to delete: "))
+        Delete_task(task_id)
+        print("Task deleted!")
+
+    elif user == "update":
+        task_id = int(input("enter the ID of the task to update: "))
+        new_status = input("enter the new status (pending/completed/progress/overdue): ")
+        update_task_status(task_id, new_status)
+        print("Task updated!")
 
 
-user1 = input("do u want to perform another action? (yes/no): ")
+    user1 = input("do u want to perform another action? (yes/no): ")
 
-if user1.lower() == "yes":
-    count = int(input("How many actions do you want to perform? "))
-    for i in range(count):
-        user = input("What action do u want to perform? (add/view/delete/update): ")
-        if user == "add":
-            add_multiple_tasks()
-        elif user == "view":
-            print_all_tasks_paginated()
-        elif user == "delete":
-            task_id = int(input("Enter the ID of the task to delete: "))
-            Delete_task(task_id)
-            print("Task deleted!")
-        elif user == "update":
-            task_id = int(input("enter the ID of the task to update: "))
-            new_status = input("enter the new status (pending/completed/progress/overdue): ")
-            update_task_status(task_id, new_status)
-            print("Task updated!")
-        else:
-            print("Invalid action.")
-
-con.close()
+    if user1.lower() == "yes":
+        count = int(input("How many actions do you want to perform? "))
+        for i in range(count):
+            user = input("What action do u want to perform? (add/view/delete/update): ")
+            if user == "add":
+                add_multiple_tasks()
+            elif user == "view":
+                print_all_tasks_paginated()
+            elif user == "delete":
+                task_id = int(input("Enter the ID of the task to delete: "))
+                Delete_task(task_id)
+                print("Task deleted!")
+            elif user == "update":
+                task_id = int(input("enter the ID of the task to update: "))
+                new_status = input("enter the new status (pending/completed/progress/overdue): ")
+                update_task_status(task_id, new_status)
+                print("Task updated!")
+            else:
+                print("Invalid action.")
+    con.close()
+if __name__ == "__main__":
+    main()
