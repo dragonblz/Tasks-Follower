@@ -1,23 +1,35 @@
 import sqlite3
+from datetime import datetime
 
 con = sqlite3.connect('tasks.db')
 cur = con.cursor()
-cur.execute('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, title TEXT, status TEXT)')
+cur.execute('CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, title TEXT, status TEXT, due_date INTEGER)')
+con.commit()
 res = cur.execute('SELECT * FROM tasks')
 
 
-def add_task(description):
-    cur.execute('INSERT INTO tasks(title, status) VALUES(?, ?)', (description, 'pending'))
+def add_task(description, due_date=None):
+    cur.execute('INSERT INTO tasks(title, status, due_date) VALUES(?, ?, ?)', (description, 'pending', due_date))
     con.commit()
 
 def add_multiple_tasks():
-    count = int(input("How many tasks do you want to add? "))
-    if count <= 0:
+    count_input = input("How many tasks do you want to add? ")
+    if not count_input.isdigit() or int(count_input) <= 0:
         print("Please enter a positive number.")
         return
+    count = int(count_input)
     for i in range(count):
         description = input("Enter task title: ")
-        add_task(description)
+        due_date_input = input("Enter due date (YYYY-MM-DD) or leave blank: ")
+        if due_date_input:
+            try:
+                due_date = int(datetime.strptime(due_date_input, "%Y-%m-%d").strftime("%Y%m%d"))
+            except ValueError:
+                print("Invalid date format. Saving without due date.")
+                due_date = None
+        else:
+            due_date = None
+        add_task(description, due_date)
         print("Task added!")
 
 def get_all_tasks():
@@ -31,7 +43,11 @@ def print_all_tasks_paginated(page_size=10):
         return
     print("All tasks:")
     for i, task in enumerate(tasks, 1):
-        print(f"ID: {task[0]}\nTitle: {task[1]}\nStatus: {task[2]}\n" + "-"*20)
+        due_date_str = (
+            datetime.strptime(str(task[3]), "%Y%m%d").strftime("%Y-%m-%d")
+            if task[3] else "None"
+        )
+        print(f"ID: {task[0]}\nTitle: {task[1]}\nStatus: {task[2]}\nDue Date: {due_date_str}\n" + "-"*20)
         if i % page_size == 0 and i != len(tasks):
             input("Press Enter to see more tasks...")
 
