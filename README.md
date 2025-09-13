@@ -21,18 +21,18 @@ Easily add, view, update, and delete your tasks—right from your terminal!
 ### With pipx (Recommended)
 
 1. **Clone the repository:**
-    ```sh
+    ```
     git clone https://github.com/dragonblz/Tasks-Follower.git
     cd Tasks-Follower
     ```
 
 2. **Install with pipx:**
-    ```sh
+    ```
     pipx install .
     ```
 
 3. **(Optional) If you see a PATH warning, run:**
-    ```sh
+    ```
     pipx ensurepath
     ```
     Then restart your terminal.
@@ -43,7 +43,7 @@ Easily add, view, update, and delete your tasks—right from your terminal!
 
 After installation, run the tool from any terminal:
 
-```sh
+```
 tasks-follower
 ```
 
